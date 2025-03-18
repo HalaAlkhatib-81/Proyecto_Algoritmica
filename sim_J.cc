@@ -44,9 +44,6 @@ int main()
     readLinesFromFile("permutacion1_1.txt", doc1);
     readLinesFromFile("permutacion1_2.txt", doc2);
 
-    //set<string> doc1 = {"apple and pineapple", "apple and orange"};
-    //set<string> doc2 = {"apple and pineapple"};
-
     cout << "////////////////// Documento 1:" << endl;
     for (const auto &line : doc1)
     {
