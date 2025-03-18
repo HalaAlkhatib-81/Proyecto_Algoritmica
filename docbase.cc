@@ -5,6 +5,7 @@
 
 using namespace std;
 
+string directorio = "generaciones";
 unordered_set<string> obtener_stopwords() {
     unordered_set<string> stopwords;
     ifstream archivo("stopwords-es.txt");
@@ -88,5 +89,5 @@ int main() {
         cin >> num;
     }
 
-    procesar_texto("documento_original.txt", "documento_salida.txt", stopwords, num);
+    procesar_texto("documento_original.txt", directorio + "/documento_salida.txt", stopwords, num);
 }

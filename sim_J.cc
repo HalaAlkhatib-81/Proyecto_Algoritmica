@@ -1,13 +1,14 @@
 #include <iostream>
 #include <set>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 // Función para calcular la similitud de Jaccard entre dos conjuntos
-double jaccardSimilarity(const set<int> &setA, const set<int> &setB)
+double jaccardSimilarity(const set<string> &setA, const set<string> &setB)
 {
     // Conjuntos para almacenar la intersección y la unión
-    set<int> intersectionSet, unionSet;
+    set<string> intersectionSet, unionSet;
 
     // Calcular la intersección de setA y setB
     set_intersection(setA.begin(), setA.end(), setB.begin(), setB.end(), inserter(intersectionSet, intersectionSet.begin()));
@@ -26,8 +27,8 @@ double jaccardSimilarity(const set<int> &setA, const set<int> &setB)
 int main()
 {
     // Ejemplo de conjuntos
-    set<int> doc1 = {1, 2, 3, 4, 5};
-    set<int> doc2 = {4, 5, 6, 7, 8};
+    set<string> doc1 = {"apple and pineapple", "apple and orange"};
+    set<string> doc2 = {"apple and pineapple"};
 
     double similarity = jaccardSimilarity(doc1, doc2);
     cout << "La similitud de Jaccard es: " << similarity << endl;
