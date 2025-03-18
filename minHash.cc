@@ -1,13 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <unordered_set>
+#include <fstream>
+#include <set>
 #include <unordered_map>
 #include "xxhash.h"
 using namespace std;
 
 const int T = 10;
-vector<uint32_t> computarMinHash(unordered_set<string> shingles){
+vector<uint32_t> computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
         for(int i = 0; i < T; i++){
@@ -29,15 +30,26 @@ double similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
     return count/T;
 }
 
+void readLinesFromFile(const string &filename, set<string> &doc)
+{
+    ifstream file(filename);
+    string line;
+    while (getline(file, line))
+    {
+        doc.insert(line);
+        cout << line << endl;
+    }
+}
+
 
 
 int main(){
 
-    std::unordered_set<std::string> shinglesA = {"algoritmo hashing útil", "hashing útil comparar", "útil comparar documentos"};
-    std::unordered_set<std::string> shinglesB = {"algoritmo hashing útil", "hashing útil comparar", "permite comparar textos"}; 
+    set<std::string> shinglesA = {"algoritmo hashing útil", "hashing útil comparar", "útil comparar documentos"};
+    set<std::string> shinglesB = {"algoritmo hashing útil", "hashing útil comparar", "permite comparar textos"}; 
 
-    std::vector<uint32_t> signatureA = computarMinHash(shinglesA);
-    std::vector<uint32_t> signatureB = computarMinHash(shinglesB);
+    vector<uint32_t> signatureA = computarMinHash(shinglesA);
+    vector<uint32_t> signatureB = computarMinHash(shinglesB);
 
     double numeros = similaridades(signatureA, signatureB);    
     cout << numeros << endl;
