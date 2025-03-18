@@ -42,7 +42,7 @@ run_simJ: sim_J.exe
 clean:
 	rm -f $(EXES)
 	rm -rf $(GENERATIONS_DIR)
-	rm -f documento_salida.txt
+	rm -f $(filter-out documento_original.txt stopwords-es.txt, $(wildcard *.txt))
 
 # Regla de ayuda
 help:

@@ -4,7 +4,6 @@
 #include <sstream>
 
 using namespace std;
-string directorio = "generaciones";
 void generar_k_shingles(const string& archivo_entrada, const string& archivo_salida, int k) {
     ifstream entrada(archivo_entrada);
     ofstream salida(archivo_salida);
@@ -41,5 +40,5 @@ int main() {
     cout << "Dame un valor de k: " << endl;
     cin >> k;
 
-    generar_k_shingles("documento_salida.txt", directorio + "/k-shingles.txt", k);
+    generar_k_shingles("documento_salida.txt", "k-shingles.txt", k);
 }

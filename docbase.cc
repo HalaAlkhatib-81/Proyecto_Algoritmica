@@ -89,5 +89,5 @@ int main() {
         cin >> num;
     }
 
-    procesar_texto("documento_original.txt", directorio + "/documento_salida.txt", stopwords, num);
+    procesar_texto("documento_original.txt", "documento_salida.txt", stopwords, num);
 }

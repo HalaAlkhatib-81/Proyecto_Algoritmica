@@ -6,7 +6,6 @@
 #include <unordered_set>
 
 using namespace std;
-string directorio = "generaciones";
 void generar_permutaciones(vector<vector<string> >& k_shingles, int tamano, int n) {
     for (int i = 1; i <= 20; ++i) {
         random_device rd;
@@ -20,7 +19,7 @@ void generar_permutaciones(vector<vector<string> >& k_shingles, int tamano, int 
             indices_elegidos.insert(indice);
         }
         
-        string nombre_archivo = directorio + "/permutacion1_" + to_string(i) + ".txt";
+        string nombre_archivo = "permutacion1_" + to_string(i) + ".txt";
         ofstream archivo(nombre_archivo);
 
         if (!archivo) {
