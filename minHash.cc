@@ -7,7 +7,7 @@
 #include "xxhash.h"
 using namespace std;
 
-const int T = 10;
+const int T = 100;
 vector<uint32_t> computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
@@ -26,7 +26,6 @@ double similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
             count++;
         }
     }
-    cerr << count << endl;
     return count/T;
 }
 
@@ -45,13 +44,15 @@ void readLinesFromFile(const string &filename, set<string> &doc)
 
 int main(){
 
-    set<std::string> shinglesA = {"algoritmo hashing útil", "hashing útil comparar", "útil comparar documentos"};
-    set<std::string> shinglesB = {"algoritmo hashing útil", "hashing útil comparar", "permite comparar textos"}; 
+    set<string> shinglesA;
+    set<string> shinglesB;
+    readLinesFromFile("docA.txt", shinglesA);
+    readLinesFromFile("docB.txt", shinglesB);
 
-    vector<uint32_t> signatureA = computarMinHash(shinglesA);
-    vector<uint32_t> signatureB = computarMinHash(shinglesB);
+    vector<uint32_t> firmaA = computarMinHash(shinglesA);
+    vector<uint32_t> firmaB = computarMinHash(shinglesB);
 
-    double numeros = similaridades(signatureA, signatureB);    
+    double numeros = similaridades(firmaA, firmaB);    
     cout << numeros << endl;
     return 0;
 }
