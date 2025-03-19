@@ -36,7 +36,6 @@ void readLinesFromFile(const string &filename, set<string> &doc)
     while (getline(file, line))
     {
         doc.insert(line);
-        cout << line << endl;
     }
 }
 
