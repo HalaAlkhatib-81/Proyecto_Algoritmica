@@ -50,13 +50,18 @@ void procesar_texto(const string& archivo_entrada, const string& archivo_salida,
     }
 
     string palabra;
+    bool primero = true;
 
     if (num == "1") {
          while(entrada >> palabra) {
             string palabra_final = limpiar_palabra(palabra);
-            //agrego palabra a la salida si no es un stopword
-            if (!stopwords.count(palabra_final)) {
-                salida << palabra_final << endl;
+            //agrego palabra a la salida si no es un stopword y si no es la palabra vacía 
+            if (!palabra_final.empty() && !stopwords.count(palabra_final)) {
+                if (primero) {
+                    salida << palabra_final;
+                    primero = false;
+                }
+                else salida << endl << palabra_final;
             }
         } 
     }
@@ -64,12 +69,16 @@ void procesar_texto(const string& archivo_entrada, const string& archivo_salida,
     else {
         while(entrada >> palabra) {
             string palabra_final = limpiar_palabra(palabra);
-            //agrego palabra a la salida si no es un stopword
-            if (!stopwords.count(palabra_final)) {
-                salida << palabra_final << " ";
+            //agrego palabra a la salida si no es un stopword y si no es la palabra vacía
+            if (!palabra_final.empty() && !stopwords.count(palabra_final)) {
+                if (primero) {
+                    salida << palabra_final;
+                    primero = false;
+                }
+                else salida << " " << palabra_final;
             }
         }
-        salida << endl;
+        //salida << endl;
     }
     entrada.close();
     salida.close();

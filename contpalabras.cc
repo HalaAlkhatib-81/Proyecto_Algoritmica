@@ -59,7 +59,7 @@ int contador_palabras(const string& archivo_entrada, const unordered_set<string>
         //nos quedamos con la palabra sola, en minúsculas y sin signos de puntuación y agregamos en el set solo si no es stopword
         string palabra_final = limpiar_palabra(palabra);
         //agrego palabra al set si no es un stopword
-        if (!stopwords.count(palabra_final)) {
+        if (!palabra_final.empty() && !stopwords.count(palabra_final)) {
             palabras_diferentes.insert(palabra_final);
         }
     }
