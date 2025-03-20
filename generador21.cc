@@ -6,7 +6,6 @@
 #include <unordered_set>
 
 using namespace std;
-
 void generar_permutaciones(vector<vector<string> >& k_shingles, int tamano, int n) {
     for (int i = 1; i <= 20; ++i) {
         random_device rd;

@@ -4,7 +4,6 @@
 #include <sstream>
 
 using namespace std;
-
 void generar_k_shingles(const string& archivo_entrada, const string& archivo_salida, int k) {
     ifstream entrada(archivo_entrada);
     ofstream salida(archivo_salida);
