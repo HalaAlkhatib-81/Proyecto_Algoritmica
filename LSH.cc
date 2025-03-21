@@ -7,7 +7,7 @@
 #include "xxhash.h"
 using namespace std;
 
-const int T = 100;
+const int T = 10;
 vector<uint32_t> computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
@@ -45,7 +45,7 @@ vector<vector<int>> bandes(vector<uint32_t> minhashes, int b){
 
 void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable) {
     for (int i = 0; i < bandes.size(); i++) {
-        size_t hash = 0;
+        int hash = 0;
         for (int j = 0; j < bandes[i].size(); j++) {
             hash = hash * 31 + bandes[i][j];
         }
@@ -70,16 +70,15 @@ int main(){
 
     vector<uint32_t> firmaA = computarMinHash(shinglesA);
     vector<uint32_t> firmaB = computarMinHash(shinglesB);
-    vector<vector<int>> bandesA = bandes(firmaA, 10);
-    vector<vector<int>> bandesB = bandes(firmaB, 10);
+    vector<vector<int>> bandesA = bandes(firmaA, 6);
+    vector<vector<int>> bandesB = bandes(firmaB, 6);
 
     unordered_map<size_t, vector<int>> lshTable;
     localitySensitiveHashing(bandesA, 1, lshTable);
     localitySensitiveHashing(bandesB, 2, lshTable);
 
-    // Comprovem si els documents han caigut en la mateixa banda
     bool sonCandidats = false;
-    for (const auto &entry : lshTable) {
+    for (pair<int, vector<int>> entry: lshTable) {
         if (entry.second.size() > 1) {
             cout << "Possible parella similar trobada en banda hash: " << entry.first << endl;
             sonCandidats = true;
