@@ -81,6 +81,41 @@ double LSH::similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32
     return (double)coincidencies / T;
 }
 
+double LSH::funcion_general_LSH(string docA, string docB, int option, int k, int b){
+    set<string> shinglesA;
+    set<string> shinglesB;
+    readElementsFromFile(docA, shinglesA, option, k);
+    readElementsFromFile(docB, shinglesB, option, k);
+
+    vector<uint32_t> firmaA = computarMinHash(shinglesA);
+    vector<uint32_t> firmaB = computarMinHash(shinglesB);
+    vector<vector<int>> bandesA = bandes(firmaA, b);
+    vector<vector<int>> bandesB = bandes(firmaB, b);
+
+    unordered_map<size_t, vector<int>> lshTable;
+    localitySensitiveHashing(bandesA, 1, lshTable);
+    localitySensitiveHashing(bandesB, 2, lshTable);
+
+    bool sonCandidats = false;
+    for (pair<int, vector<int>> entry: lshTable) {
+        if (entry.second.size() > 1) {
+            cout << "Possible parella similar trobada en banda hash: " << entry.first << endl;
+            sonCandidats = true;
+        }
+    }
+
+    if (sonCandidats) {
+        double sim = similitudJaccard(firmaA, firmaB);
+        cout << "S'han trobat candidats similars." << endl;
+        return sim;
+    } else {
+        cout << "No s'han trobat candidats similars." << endl;
+        return 0;        
+    }
+
+
+}
+
 /*int main(){
 
     set<string> shinglesA;

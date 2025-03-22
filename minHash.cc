@@ -2,8 +2,7 @@
  * @brief implementacion de la clase minHash */
 #include "minHash.hh"
 
-const int T = 100;
-
+const int T = 10;
 vector<uint32_t> minHash::computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
@@ -13,16 +12,6 @@ vector<uint32_t> minHash::computarMinHash(set<string> shingles){
         }
     }
     return minhashes;
-}
-
-double minHash::similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
-    double count = 0;
-    for(size_t i = 0; i < minhashesA.size(); i++){
-        if(minhashesA[i] == minhashesB[i]){
-            count++;
-        }
-    }
-    return count/T;
 }
 
 void minHash::readElementsFromFile(const string &filename, set<string> &doc, int opcion, int k) {
@@ -63,19 +52,24 @@ void minHash::readElementsFromFile(const string &filename, set<string> &doc, int
     file.close();
 }
 
-
-
-/*int main(){
-
+double minHash::funcion_general_minHash(string docA, string docB, int option, int k){
     set<string> shinglesA;
     set<string> shinglesB;
-    readLinesFromFile("docA.txt", shinglesA);
-    readLinesFromFile("docB.txt", shinglesB);
+    readElementsFromFile(docA, shinglesA, option, k);
+    readElementsFromFile(docB, shinglesB, option, k);
 
     vector<uint32_t> firmaA = computarMinHash(shinglesA);
     vector<uint32_t> firmaB = computarMinHash(shinglesB);
 
-    double numeros = similaridades(firmaA, firmaB);    
-    cout << numeros << endl;
-    return 0;
-}*/
+    double count = 0;
+    for(size_t i = 0; i < firmaA.size(); i++){
+        if(firmaA[i] == firmaB[i]){
+            count++;
+        }
+    }
+    double numeros = count/T;    
+    return numeros;
+}
+
+
+

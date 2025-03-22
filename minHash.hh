@@ -30,14 +30,18 @@ class minHash{
          */
         vector<uint32_t> computarMinHash(set<string> shingles);
 
-        /** @brief calcula la similaridad de Jaccard aproximada entre dos documentos usando los minHash creados
-         * @param minHashesA vector con los minHash del documento A
-         * @param minHashesB vector con los minHash del documento B
-         * @return similaridad de Jaccard aproximada entre los documentos
-         * @pre firmaA y firmaB no vacios
-         * @post se devuelve la similaridad de Jaccard aproximada entre los documentos
+
+
+        /** @brief funcion general para calcular la similaridad entre dos documentos
+         * @param docA nombre del archivo del documento A
+         * @param docB nombre del archivo del documento B
+         * @param option opcion para leer el archivo
+         * @param k numero de shingles por grupo
+         * @return similaridad entre los documentos
+         * @pre docA y docB existen
+         * @post se devuelve la similaridad entre los documentos
          */
-        double similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB);
+        double funcion_general_minHash(string docA, string docB, int option, int k);
     private:
         /** @brief lee las lineas de un archivo y las guarda en un conjunto
          * @param filename nombre del archivo

@@ -54,6 +54,18 @@ class LSH{
          */
         void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable);
         
+        /** @brief funcion general para calcular la similaridad entre dos documentos
+         * @param docA nombre del archivo del documento A
+         * @param docB nombre del archivo del documento B
+         * @param option opcion para leer el archivo
+         * @param k numero de shingles por grupo
+         * @param b numero de bandas
+         * @return similaridad entre los documentos
+         * @pre docA y docB existen
+         * @post se devuelve la similaridad entre los documentos
+         */
+
+        double funcion_general_LSH(string docA, string docB, int option, int k, int b);
     private:
             /** @brief lee las lineas de un archivo y las guarda en un conjunto
          * @param filename nombre del archivo
