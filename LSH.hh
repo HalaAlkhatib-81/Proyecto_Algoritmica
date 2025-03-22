@@ -58,6 +58,8 @@ class LSH{
             /** @brief lee las lineas de un archivo y las guarda en un conjunto
          * @param filename nombre del archivo
          * @param doc conjunto donde se guardaran las lineas
+         * @param opcion opcion para leer el archivo
+         * @param k numero de shingles por grupo
          * @pre filename existe
          * @post se guardan las lineas del archivo en el conjunto
          */
