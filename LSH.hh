@@ -24,7 +24,7 @@ class LSH{
          * @pre shingles no vacio
          * @post se devuelven los minHash de los shingles en un vector de enteros
          */
-        vector<uint32_t> computarMinHash(set<string> shingles);
+        static vector<uint32_t> computarMinHash(set<string> shingles);
 
         /** @brief calcula las bandas de los minHash
          * @param minhashes vector con los minHash del documento
@@ -33,7 +33,7 @@ class LSH{
          * @pre minhashes no vacio
          * @post se devuelven las bandas de los minHash en un vector de vectores de enteros
          */
-        vector<vector<int>> bandes(vector<uint32_t> minhashes, int b);
+        static vector<vector<int>> bandes(vector<uint32_t> minhashes, int b);
 
         /** @brief calcula la similaridad de Jaccard aproximada entre dos documentos usando los minHash creados
          * @param firmaA vector con los minHash del documento A
@@ -42,7 +42,7 @@ class LSH{
          * @pre firmaA y firmaB no vacios
          * @post se devuelve la similaridad de Jaccard aproximada entre los documentos
          */
-        double similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32_t> &firmaB);
+        static double similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32_t> &firmaB);
 
 
 
@@ -52,7 +52,7 @@ class LSH{
          * @param lshTable tabla hash donde se guardaran los documentos que coinciden en una banda
          * @pre bandes no vacio
          */
-        void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable);
+        static void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable);
         
         /** @brief funcion general para calcular la similaridad entre dos documentos
          * @param docA nombre del archivo del documento A
@@ -65,7 +65,7 @@ class LSH{
          * @post se devuelve la similaridad entre los documentos
          */
 
-        double funcion_general_LSH(string docA, string docB, int option, int k, int b);
+        static double funcion_general_LSH(string docA, string docB, int option, int k, int b);
     private:
             /** @brief lee las lineas de un archivo y las guarda en un conjunto
          * @param filename nombre del archivo

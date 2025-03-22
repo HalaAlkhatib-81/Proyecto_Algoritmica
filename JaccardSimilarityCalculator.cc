@@ -43,7 +43,7 @@ void JaccardSimilarityCalculator::readElementsFromFile(const string &filename, s
     file.close();
 }
 
-double JaccardSimilarityCalculator::computeSimilarity(const string &filename1, const string &filename2, int opcion, int k = 0) {
+double JaccardSimilarityCalculator::computeSimilarity(const string &filename1, const string &filename2, int opcion, int k) {
     set<string> doc1, doc2;
     readElementsFromFile(filename1, doc1, opcion, k);
     readElementsFromFile(filename2, doc2, opcion, k);

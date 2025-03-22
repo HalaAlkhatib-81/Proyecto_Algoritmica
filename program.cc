@@ -14,7 +14,8 @@
 #include "K_Shingles.hh"
 #include "K_Shingles_Permutator.hh"
 #include "JaccardSimilarityCalculator.hh"
-
+#include "minHash.hh"
+#include "LSH.hh"
 using namespace std;
 
 /** @brief Muestra todos los comandos disponibles y sus parámetros
@@ -92,8 +93,13 @@ int main() {
             cout << "# " << comando << " " << archivo1 << " " << archivo2 << " " << opcion;
             if (opcion == 2) cout << " " << k;
             cout << endl;
-            double similitud = JaccardSimilarityCalculator::computeSimilarity(archivo1, archivo2, opcion, k);
-            cout << "Similitud de Jaccard: " << similitud * 100 << "%" << endl;
+            double similitud1 = JaccardSimilarityCalculator::computeSimilarity(archivo1, archivo2, opcion, k);
+            cout << "Similitud de Jaccard: " << similitud1 * 100 << "%" << endl;
+            double similitud2 = minHash::funcion_general_minHash(archivo1, archivo2, opcion, k);
+            cout << "Similitud de MinHash: " << similitud2 * 100 << "%" << endl;
+            double similitud3 = LSH::funcion_general_LSH(archivo1, archivo2, opcion, k, 20);
+            cout << "Similitud de LSH: " << similitud3 * 100 << "%" << endl;
+            cout << endl;
         }
         else {
             cout << "Comando no reconocido. Escriba 'mostrar_comandos' para ver la lista de comandos." << endl;

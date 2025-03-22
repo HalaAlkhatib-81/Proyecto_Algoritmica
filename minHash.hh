@@ -28,7 +28,7 @@ class minHash{
          * @pre shingles no vacio
          * @post se devuelven los minHash de los shingles en un vector de enteros
          */
-        vector<uint32_t> computarMinHash(set<string> shingles);
+        static vector<uint32_t> computarMinHash(set<string> shingles);
 
 
 
@@ -41,7 +41,7 @@ class minHash{
          * @pre docA y docB existen
          * @post se devuelve la similaridad entre los documentos
          */
-        double funcion_general_minHash(string docA, string docB, int option, int k);
+        static double funcion_general_minHash(string docA, string docB, int option, int k);
     private:
         /** @brief lee las lineas de un archivo y las guarda en un conjunto
          * @param filename nombre del archivo
