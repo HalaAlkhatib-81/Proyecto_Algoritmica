@@ -1,14 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <set>
-#include <unordered_map>
-#include "xxhash.h"
-using namespace std;
-
+#include "LSH.hh"
 const int T = 10;
-vector<uint32_t> computarMinHash(set<string> shingles){
+vector<uint32_t> LSH::computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
         for(int i = 0; i < T; i++){
@@ -20,17 +12,45 @@ vector<uint32_t> computarMinHash(set<string> shingles){
 }
 
 
-void readLinesFromFile(const string &filename, set<string> &doc)
-{
+void LSH::readElementsFromFile(const string &filename, set<string> &doc, int opcion, int k) {
     ifstream file(filename);
-    string line;
-    while (getline(file, line))
-    {
-        doc.insert(line);
+    if (!file) {
+        cerr << "Error: No se pudo abrir el archivo " << filename << endl;
+        return;
     }
+
+    string palabra;
+
+    if (opcion == 1) {
+        while (file >> palabra) {
+            doc.insert(palabra);
+        }
+    }
+    else if (opcion == 2) {
+        int count = 0;
+        string grupo;
+    
+        while (file >> palabra) {
+            if (count == 0) {
+                grupo += palabra;
+            } else {
+                grupo += " " + palabra;
+            }
+    
+            count++;
+    
+            if (count == k) {
+                doc.insert(grupo);
+                grupo.clear();
+                count = 0;
+            }
+        }
+    }
+
+    file.close();
 }
 
-vector<vector<int>> bandes(vector<uint32_t> minhashes, int b){
+vector<vector<int>> LSH::bandes(vector<uint32_t> minhashes, int b){
     vector<vector<int>> bandes;
     int r = T/b;
     for(int i = 0; i < b; i++){
@@ -43,7 +63,7 @@ vector<vector<int>> bandes(vector<uint32_t> minhashes, int b){
     return bandes;
 }
 
-void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable) {
+void LSH::localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unordered_map<size_t, vector<int>> &lshTable) {
     for (int i = 0; i < bandes.size(); i++) {
         int hash = 0;
         for (int j = 0; j < bandes[i].size(); j++) {
@@ -53,7 +73,7 @@ void localitySensitiveHashing(const vector<vector<int>> &bandes, int docId, unor
     }
 }
 
-double similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32_t> &firmaB) {
+double LSH::similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32_t> &firmaB) {
     int coincidencies = 0;
     for (int i = 0; i < T; i++) {
         if (firmaA[i] == firmaB[i]) coincidencies++;
@@ -61,7 +81,7 @@ double similitudJaccard(const vector<uint32_t> &firmaA, const vector<uint32_t> &
     return (double)coincidencies / T;
 }
 
-int main(){
+/*int main(){
 
     set<string> shinglesA;
     set<string> shinglesB;
@@ -93,4 +113,4 @@ int main(){
     }
 
     return 0;
-}
+}*/
