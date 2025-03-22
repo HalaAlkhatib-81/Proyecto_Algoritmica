@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "unordered_set": "cpp",
-        "iosfwd": "cpp",
-        "istream": "cpp",
-        "iostream": "cpp"
-    }
-}

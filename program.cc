@@ -13,7 +13,10 @@
 #include "Text_processor.hh"
 #include "K_Shingles.hh"
 #include "K_Shingles_Permutator.hh"
+<<<<<<< HEAD
 #include "JaccardSimilarityCalculator.hh"
+=======
+>>>>>>> d58b41020bc221fc15cadf2b4641217a756610af
 
 using namespace std;
 
@@ -24,12 +27,20 @@ using namespace std;
 void mostrar_ayuda() {
     cout << "\nComandos disponibles:" << endl;
     cout << "contar_palabras <archivo> - Cuenta palabras únicas sin stopwords." << endl;
+<<<<<<< HEAD
     cout << "procesar_texto <archivo_entrada> <archivo_salida> <opcion> - Procesa texto eliminando stopwords." << endl;
     cout << "generar_permutaciones <archivo_entrada> <tamano> <num_permutaciones> - Genera permutaciones del texto." << endl;
     cout << "generar_k_shingles <archivo_entrada> <archivo_salida> <k> - Genera k-shingles del texto." << endl;
     cout << "generar_permutaciones_k_shingles <archivo> <tamano> <num_permutaciones> <n> - Permuta k-shingles." << endl;
     cout << "mostrar_comandos - Muestra esta lista de comandos." << endl;
     cout << "calcular_similitud <archivo1> <archivo2> <opcion> [k] - Calcula la similitud de Jaccard (1=palabra, 2=k-shingles)." << endl;
+=======
+    cout << "generar_permutaciones <archivo> <tamano> <num_permutaciones> - Genera permutaciones del texto." << endl;
+    cout << "procesar_texto <archivo_entrada> <archivo_salida> <opcion> - Procesa texto eliminando stopwords." << endl;
+    cout << "generar_k_shingles <archivo_entrada> <archivo_salida> <k> - Genera k-shingles del texto." << endl;
+    cout << "generar_permutaciones_k_shingles <archivo> <tamano> <num_permutaciones> <n> - Permuta k-shingles." << endl;
+    cout << "mostrar_comandos - Muestra esta lista de comandos." << endl;
+>>>>>>> d58b41020bc221fc15cadf2b4641217a756610af
     cout << "fin - Finaliza la ejecución del programa." << endl;
     cout << endl;
 }
@@ -84,6 +95,7 @@ int main() {
         else if (comando == "mostrar_comandos") {
             mostrar_ayuda();
         }
+<<<<<<< HEAD
         else if (comando == "calcular_similitud") {
             string archivo1, archivo2;
             int opcion, k = 0;
@@ -95,6 +107,8 @@ int main() {
             double similitud = JaccardSimilarityCalculator::computeSimilarity(archivo1, archivo2, opcion, k);
             cout << "Similitud de Jaccard: " << similitud * 100 << "%" << endl;
         }
+=======
+>>>>>>> d58b41020bc221fc15cadf2b4641217a756610af
         else {
             cout << "Comando no reconocido. Escriba 'mostrar_comandos' para ver la lista de comandos." << endl;
             cout << endl;
