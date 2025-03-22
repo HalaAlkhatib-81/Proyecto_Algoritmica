@@ -1,14 +1,10 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <set>
-#include <unordered_map>
-#include "xxhash.h"
-using namespace std;
+/** @file minHash.cc
+ * @brief implementacion de la clase minHash */
+#include "minHash.hh"
 
 const int T = 100;
-vector<uint32_t> computarMinHash(set<string> shingles){
+
+vector<uint32_t> minHash::computarMinHash(set<string> shingles){
     vector<uint32_t> minhashes(T, UINT32_MAX);
     for(string shin: shingles){
         for(int i = 0; i < T; i++){
@@ -19,7 +15,7 @@ vector<uint32_t> computarMinHash(set<string> shingles){
     return minhashes;
 }
 
-double similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
+double minHash::similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
     double count = 0;
     for(size_t i = 0; i < minhashesA.size(); i++){
         if(minhashesA[i] == minhashesB[i]){
@@ -29,19 +25,47 @@ double similaridades(vector<uint32_t> minhashesA, vector<uint32_t> minhashesB){
     return count/T;
 }
 
-void readLinesFromFile(const string &filename, set<string> &doc)
-{
+void minHash::readElementsFromFile(const string &filename, set<string> &doc, int opcion, int k) {
     ifstream file(filename);
-    string line;
-    while (getline(file, line))
-    {
-        doc.insert(line);
+    if (!file) {
+        cerr << "Error: No se pudo abrir el archivo " << filename << endl;
+        return;
     }
+
+    string palabra;
+
+    if (opcion == 1) {
+        while (file >> palabra) {
+            doc.insert(palabra);
+        }
+    }
+    else if (opcion == 2) {
+        int count = 0;
+        string grupo;
+    
+        while (file >> palabra) {
+            if (count == 0) {
+                grupo += palabra;
+            } else {
+                grupo += " " + palabra;
+            }
+    
+            count++;
+    
+            if (count == k) {
+                doc.insert(grupo);
+                grupo.clear();
+                count = 0;
+            }
+        }
+    }
+
+    file.close();
 }
 
 
 
-int main(){
+/*int main(){
 
     set<string> shinglesA;
     set<string> shinglesB;
@@ -54,4 +78,4 @@ int main(){
     double numeros = similaridades(firmaA, firmaB);    
     cout << numeros << endl;
     return 0;
-}
+}*/
